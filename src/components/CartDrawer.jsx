@@ -22,9 +22,13 @@ export default function CartDrawer() {
         }
 
         const script = document.createElement('script');
-        script.src = "https://js.yoco.com/sdk/v1/yoco-sdk-web.js";
+        // Using the modern loader which pulls the latest SDK versions
+        script.src = "https://js.yoco.com/sdk/v1/yoco-sdk-loader.js";
         script.async = true;
-        script.onload = () => setYocoLoaded(true);
+        script.onload = () => {
+            console.log("Yoco SDK Loader Ready");
+            setYocoLoaded(true);
+        };
         document.body.appendChild(script);
     }, []);
 
@@ -32,18 +36,21 @@ export default function CartDrawer() {
     useEffect(() => {
         if (showPayment && yocoLoaded && window.YocoSDK) {
             const timer = setTimeout(() => {
-                const yoco = new window.YocoSDK({
-                    publicKey: import.meta.env.VITE_YOCO_PUBLIC_KEY
-                });
+                try {
+                    const yoco = new window.YocoSDK({
+                        publicKey: import.meta.env.VITE_YOCO_PUBLIC_KEY
+                    });
 
-                const inline = yoco.inline({
-                    // Removing layout: 'field' to show all placeholders standardly
-                    amountInCents: Math.round(finalTotal * 100),
-                    currency: 'ZAR'
-                });
+                    const inline = yoco.inline({
+                        amountInCents: Math.round(finalTotal * 100),
+                        currency: 'ZAR'
+                    });
 
-                inline.mount('#yoco-card-frame');
-                yocoRef.current = inline;
+                    inline.mount('#yoco-card-frame');
+                    yocoRef.current = inline;
+                } catch (err) {
+                    console.error("Yoco Initialization Error:", err);
+                }
             }, 300);
             return () => clearTimeout(timer);
         }
