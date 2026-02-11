@@ -1,0 +1,86 @@
+:root {
+  --color-black: #111111;
+  --color-white: #ffffff;
+  --color-gold: #fbbf24;
+  --color-gold-hover: #f59e0b;
+  --color-bg: #ececec;
+  /* Slightly darker gray for better contrast like reference */
+  --color-text-main: #1a1a1a;
+  --color-text-muted: #666666;
+
+  --font-main: 'Inter', sans-serif;
+  --font-display: 'Inter', sans-serif;
+  /* Using Inter Tight/Black for headers */
+
+  --shadow-soft: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+  --shadow-button: 0 10px 20px -5px rgba(251, 191, 36, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  font-family: var(--font-main);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--color-black);
+}
+
+button {
+  font-family: var(--font-main);
+  cursor: pointer;
+}
+
+/* Utilities */
+.btn-primary {
+  background: var(--color-gold);
+  border: none;
+  border-radius: 50px;
+  /* Fully rounded */
+  padding: 1rem 4rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #000;
+  box-shadow: var(--shadow-button);
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 320px;
+  letter-spacing: -0.01em;
+}
+
+.btn-primary:hover {
+  background: var(--color-gold-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(251, 191, 36, 0.5);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.text-gold {
+  color: var(--color-gold);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.font-bold {
+  font-weight: 700;
+}
